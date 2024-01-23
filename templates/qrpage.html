@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V863CF3EXJ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V863CF3EXJ');
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QR Generator</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/fav/favicon-16x16.png">
+    <link rel="manifest" href="/static/fav/site.webmanifest">
+    <style>
+    .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+
+    .button1 {border-radius: 2px;}
+    .button2 {border-radius: 4px;}
+    .button3 {border-radius: 10px;}
+    .button4 {border-radius: 12px;}
+    .button5 {border-radius: 50%;}
+    </style>
+  </head>
+  <body>
+    <center>
+        <table border="0">
+            <tr>
+                <td><img src="/static/QR.jpg" width="400"></td>
+                <td><img src="/static/qr.png" width="500"></td>
+            </tr>
+        </table>
+
+        <form action="/form" method="POST">
+            <input style="width:500px;height:62px;font-size:14pt;" id="entryurl" name="entryurl">
+            <input type="submit" class="button button3" value="Submit">
+        </form>
+
+
+    </center>
+   
+  </body>
+</html>
