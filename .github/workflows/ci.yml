@@ -80,4 +80,4 @@ jobs:
           platforms: linux/amd64
           push: true
           # tags: ${{ env.LATEST_TAG }}
-          tags: 'therealsojay/qrcodeapp:latest'
+          tags: 'therealsojay/qrcodeapp:1.3'
