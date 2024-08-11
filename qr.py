@@ -20,8 +20,3 @@ def make_qr(image):
 
     img = qrcode.make(image)
     img.save("static/QR.jpg")
-
-    
-
-
-    
