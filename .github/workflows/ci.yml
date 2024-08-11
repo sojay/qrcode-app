@@ -37,6 +37,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+            - name: conventional Changelog actions
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3.7.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: create releases
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag_name }}
+          release_name: ${{ steps.changelog.outputs.tag_name }}
+          body: ${{ steps.changelog.outputs.changelog }}
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
