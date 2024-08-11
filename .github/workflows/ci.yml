@@ -54,14 +54,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set LATEST_TAG
-        run: |
-          LATEST_TAG="therealsojay/qrcodeapp:$(date +'%Y-%m-%d-%H-%M-%S')"
+      # - name: Set LATEST_TAG
+      #   run: |
+      #     LATEST_TAG="therealsojay/qrcodeapp:$(date +'%Y-%m-%d-%H-%M-%S')"
   
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           # tags: ${{ env.LATEST_TAG }}
           tags: 'therealsojay/qrcodeapp:latest'
