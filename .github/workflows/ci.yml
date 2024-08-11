@@ -53,6 +53,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set LATEST_TAG
+        run: |
+          LATEST_TAG="therealsojay/qrcodeapp:$(date +'%Y-%m-%d-%H-%M-%S')"
   
       - name: Build and push
         uses: docker/build-push-action@v6
