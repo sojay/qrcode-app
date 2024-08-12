@@ -58,7 +58,7 @@ jobs:
       #     node-version: 16
       # - run: npm ci
       # - run: npm run build
-      - run: npx semantic-release
+      - run: npm semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Install the cosign tool except on PR
