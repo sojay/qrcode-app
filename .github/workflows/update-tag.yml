@@ -54,3 +54,5 @@ jobs:
           git add manifests/deployment.yaml
           git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
           git push origin main
+
+          
