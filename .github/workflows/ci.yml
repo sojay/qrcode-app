@@ -72,6 +72,11 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: 'therealsojay/qrcodeapp:${{ env.IMAGE_TAG }}'
+      
+      - name: Create and verify image-tag.txt
+        run: |
+          echo "${{ env.IMAGE_TAG }}" > image-tag.txt
+          cat image-tag.txt  # Debug step to verify content
 
       - name: Upload IMAGE_TAG artifact
         uses: actions/upload-artifact@v3
