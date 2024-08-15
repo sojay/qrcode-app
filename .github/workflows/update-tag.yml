@@ -15,18 +15,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js (required for `yq`)
-        uses: actions/setup-node@v4
+      - name: Download IMAGE_TAG artifact
+        uses: actions/download-artifact@v3
         with:
-          node-version: 20.8.1
+          name: image-tag
+
+      - name: Read IMAGE_TAG from artifact
+        id: read_tag
+        run: |
+          IMAGE_TAG=$(cat image-tag.txt)
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
       - name: Install yq (YAML processor)
         run: |
           sudo npm install -g yq
-
-      # Explicitly set the IMAGE_TAG to the latest tag you want to use.
-      - name: Set IMAGE_TAG
-        run: echo "IMAGE_TAG=1.0.${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Get current image tag
         id: get_current_tag
