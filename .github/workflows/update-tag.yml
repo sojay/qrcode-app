@@ -8,59 +8,27 @@ on:
 
 jobs:
   update-deployment:
-    name: Update Kubernetes Deployment YAML
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download IMAGE_TAG artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: image-tag
-
-      - name: List files
-        run: ls -la  # Debug step to verify the file is present
-
-      - name: Read IMAGE_TAG from artifact
-        id: read_tag
+      - name: Fetch latest image tag from Docker registry
+        id: fetch_tag
         run: |
-          IMAGE_TAG=$(cat image-tag.txt)
-          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
-
-      - name: Install yq (YAML processor)
-        run: |
-          sudo npm install -g yq
-
-      - name: Get current image tag
-        id: get_current_tag
-        run: |
-          CURRENT_TAG=$(yq eval '.spec.template.spec.containers[0].image' manifests/deployment.yaml | cut -d':' -f2)
-          echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
-
-      - name: Check if image tag needs to be updated
-        id: check_tag
-        run: |
-          if [ "${{ env.CURRENT_TAG }}" == "${{ env.IMAGE_TAG }}" ]; then
-            echo "Image tag is already up to date."
-            echo "update_needed=false" >> $GITHUB_ENV
-          else
-            echo "Image tag needs to be updated."
-            echo "update_needed=true" >> $GITHUB_ENV
-          fi
+          LATEST_TAG=$(curl -s https://hub.docker.com/v2/repositories/therealsojay/qrcodeapp/tags/latest | jq -r '.name')
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
 
       - name: Update image tag in deployment.yaml
-        if: env.update_needed == 'true'
         run: |
-          NEW_IMAGE="therealsojay/qrcodeapp:${{ env.IMAGE_TAG }}"
+          NEW_IMAGE="therealsojay/qrcodeapp:${{ env.LATEST_TAG }}"
           yq eval ".spec.template.spec.containers[0].image = \"${NEW_IMAGE}\"" -i manifests/deployment.yaml
 
       - name: Commit and push changes
-        if: env.update_needed == 'true'
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add manifests/deployment.yaml
-          git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
+          git commit -m "Update image tag to ${{ env.LATEST_TAG }}"
           git push origin main
