@@ -27,7 +27,7 @@ jobs:
       - name: Get current image tag
         id: get_current_tag
         run: |
-          CURRENT_TAG=$(yq eval '.spec.template.spec.containers[0].image' path/to/your/deployment.yaml | cut -d':' -f2)
+          CURRENT_TAG=$(yq eval '.spec.template.spec.containers[0].image' manifests/deployment.yaml | cut -d':' -f2)
           echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
 
       - name: Check if image tag needs to be updated
