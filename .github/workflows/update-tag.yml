@@ -24,6 +24,10 @@ jobs:
         run: |
           sudo npm install -g yq
 
+      # Explicitly set the IMAGE_TAG to the latest tag you want to use.
+      - name: Set IMAGE_TAG
+        run: echo "IMAGE_TAG=1.0.${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Get current image tag
         id: get_current_tag
         run: |
