@@ -14,11 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Fetch latest image tag from Docker registry
-        id: fetch_tag
+      - name: Fetch tags from Docker registry
+        id: fetch_tags
         run: |
-          LATEST_TAG=$(curl -s https://hub.docker.com/v2/repositories/therealsojay/qrcodeapp/tags/latest | jq -r '.name')
-          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          tags=$(curl -s https://hub.docker.com/v2/repositories/therealsojay/qrcodeapp/tags?page_size=100 | jq -r '.results[] | "\(.name) \(.last_updated)"')
+          most_recent_tag=$(echo "$tags" | sort -k2,2r | head -n 1 | awk '{print $1}')
+          echo "LATEST_TAG=$most_recent_tag" >> $GITHUB_ENV
 
       - name: Update image tag in deployment.yaml
         run: |
