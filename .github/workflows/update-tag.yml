@@ -44,7 +44,8 @@ jobs:
       - name: Update image tag in deployment.yaml
         if: env.update_needed == 'true'
         run: |
-          yq eval '.spec.template.spec.containers[0].image = "therealsojay/qrcodeapp:${{ env.IMAGE_TAG }}"' -i manifests/deployment.yaml
+          NEW_IMAGE="therealsojay/qrcodeapp:${{ env.IMAGE_TAG }}"
+          yq eval ".spec.template.spec.containers[0].image = \"${NEW_IMAGE}\"" -i manifests/deployment.yaml
 
       - name: Commit and push changes
         if: env.update_needed == 'true'
@@ -54,5 +55,3 @@ jobs:
           git add manifests/deployment.yaml
           git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
           git push origin main
-
-          
