@@ -20,6 +20,9 @@ jobs:
         with:
           name: image-tag
 
+      - name: List files
+        run: ls -la  # Debug step to verify the file is present
+
       - name: Read IMAGE_TAG from artifact
         id: read_tag
         run: |
