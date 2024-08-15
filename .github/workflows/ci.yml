@@ -68,5 +68,4 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
-          # tags: 'therealsojay/qrcodeapp:${IMAGE_TAG}'
           tags: 'therealsojay/qrcodeapp:${{ env.IMAGE_TAG }}'
