@@ -13,7 +13,7 @@ spec:
         app: qrapp
     spec:
       containers:
-      - name: qrapp
-        image: therealsojay/qrcodeapp:1.3
-        ports:
-        - containerPort: 5001
+        - name: qrapp
+          image: therealsojay/qrcodeapp:1.0.56
+          ports:
+            - containerPort: 5001
