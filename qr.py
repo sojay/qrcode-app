@@ -5,7 +5,7 @@ import time
 # function to add to JSON
 def write_json(new_data, filename='data.json'):
     with open("static/log.json",'r+') as file:
-          # First we load existing data into a dict.
+          # First load existing data into a dict.
         file_data = json.load(file)
         # Join new_data with file_data inside emp_details
         file_data["qrs"].append(new_data)
@@ -19,4 +19,4 @@ def make_qr(image):
     write_json(newdata)
 
     img = qrcode.make(image)
-    img.save("static/QR.jpg")
+    img.save("static/QR.png")

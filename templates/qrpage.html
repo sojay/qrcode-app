@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="/static/output.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V863CF3EXJ"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-V863CF3EXJ');
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>QR Generator</title>
@@ -18,43 +11,25 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/static/fav/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/fav/favicon-16x16.png">
     <link rel="manifest" href="/static/fav/site.webmanifest">
-    <style>
-    .button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
-    margin: 4px 2px;
-    cursor: pointer;
-    }
-
-    .button1 {border-radius: 2px;}
-    .button2 {border-radius: 4px;}
-    .button3 {border-radius: 10px;}
-    .button4 {border-radius: 12px;}
-    .button5 {border-radius: 50%;}
-    </style>
   </head>
-  <body>
-    <center>
-        <table border="0">
-            <tr>
-                <td><img src="/static/QR.jpg" width="400"></td>
-                <td><img src="/static/qr.png" width="500"></td>
-            </tr>
-        </table>
+  <body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <!-- QR Image -->
+      <div class="mb-6 flex justify-center">
+        <img src="/static/qr.png" alt="QR Code" class="w-64 h-64 object-cover">
+      </div>
 
-        <form action="/form" method="POST">
-            <input style="width:500px;height:62px;font-size:14pt;" id="entryurl" name="entryurl">
-            <input type="submit" class="button button3" value="Submit">
-        </form>
+      <!-- Download button -->
+      <div class="mt-8">
+        <a href="/static/qr.png" download="QRCode.png" class="px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 hover:bg-gradient-to-r hover:from-[#FD5E57] hover:to-[#FC473E]"">
+          Download your QR code
+        </a>
+      </div>
 
-
-    </center>
-   
+      <div class="flex justify-center items-center mt-4">
+        <a href="./" class="bg-white text-black border border-gray-300 hover:bg-gray-200 hover:text-black p-2 rounded">
+          Back to Home
+        </a>
+    </div>
   </body>
 </html>
